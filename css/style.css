@@ -1,0 +1,15 @@
+#list-of-categories li{
+  list-style: none;
+  font-size: 1.5rem;
+}
+.news {
+  border: 1px solid lightgray;
+  border-radius: 6px;
+  margin: 20px;
+  padding: 20px;
+}
+.news-details{
+  height: 92px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
