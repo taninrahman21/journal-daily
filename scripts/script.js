@@ -1,5 +1,6 @@
 const categoriesContainer = document.getElementById("categories-container");
 const listOfCategories = document.getElementById("list-of-categories");
+const newsNumberCounter = document.getElementById("news-number-counter");
 
 const loadCategories = () => {
   fetch("https://openapi.programming-hero.com/api/news/categories")
@@ -14,6 +15,7 @@ const displayCategories = (categories) => {
     category.innerText = element.category_name;
     category.addEventListener("click", () => {
       // console.log(element.category_id);
+      newsNumberCounter.classList.remove("d-none");
       loader(true);
       loadCategoriesNews(element.category_id);
     })
