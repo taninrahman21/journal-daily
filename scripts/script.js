@@ -11,13 +11,15 @@ const loadCategories = () => {
 const displayCategories = (categories) => {
   categories.forEach(element => {
     const category = document.createElement("li");
+    category.style.color = "black";
     category.innerText = element.category_name;
     category.addEventListener("click", (e) => {
       // console.log(element.category_id);
       newsNumberCounter.classList.remove("d-none");
       loader(true);
+      category.classList.add("text-danger");
       loadCategoriesNews(element.category_id);
-      e.target.style.color = "red";
+      // e.target.style.color = "red";
     })
     listOfCategories.appendChild(category)
   });
@@ -29,7 +31,6 @@ const loadCategoriesNews = (id) => {
   .catch(error => console.log(error));
 }
 const displayCategoriesNews = news => {
-  console.log(news);
   news.sort((a,b )=> b.total_view - a.total_view);
   const showNewsNumber = document.getElementById("news-number");
   showNewsNumber.textContent = `${news.length} items Found!`;
