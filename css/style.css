@@ -5,7 +5,7 @@
 .news {
   border: 1px solid lightgray;
   border-radius: 6px;
-  margin: 20px;
+  margin-bottom: 20px;
   padding: 20px;
 }
 .author-img{
@@ -15,9 +15,17 @@
 @media screen and (max-width: 567px) {
   .news{
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
   }
   #list-of-categories{
-    
+    flex-wrap: wrap;
   }
-  
+  #list-of-categories li{
+    margin-right: 10px;
+  }
+  .author-section{
+    flex-direction: column;
+  }
 }

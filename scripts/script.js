@@ -10,14 +10,14 @@ const loadCategories = () => {
 }
 const displayCategories = (categories) => {
   categories.forEach(element => {
-    // console.log(element);
     const category = document.createElement("li");
     category.innerText = element.category_name;
-    category.addEventListener("click", () => {
+    category.addEventListener("click", (e) => {
       // console.log(element.category_id);
       newsNumberCounter.classList.remove("d-none");
       loader(true);
       loadCategoriesNews(element.category_id);
+      e.target.style.color = "red";
     })
     listOfCategories.appendChild(category)
   });
@@ -41,17 +41,17 @@ const displayCategoriesNews = news => {
     newsDiv.classList.add("d-flex");
     newsDiv.classList.add("news");
     newsDiv.innerHTML = `
-    <div class="me-4">
+    <div class="">
         <img src="${element.thumbnail_url}" alt="">
     </div>
     <div class="p-3 d-flex flex-column">
        <div>
        <h3>${element.title}</h3>
-       <p>${element.details.slice(0,300)}</p>
+       <p>${element.details.slice(0,250)}</p>
        </div>
-        <div class="d-flex justify-content-between align-items-center mt-5 align-self-bottom">       
+        <div class="author-section d-flex justify-content-between align-items-center mt-5 align-self-bottom">       
               <div class="d-flex align-items-center">
-                  <img class="author-img me-2" src="${element.author.img ? element.author.img : "No image Found"}">
+                  <img class="author-img me-2 img-fluid" src="${element.author.img ? element.author.img : "No image Found"}">
                   <p>${element.author.name ?  element.author.name : "No Author Found"}</p>
               </div>
               <div class="total-view d-flex align-items-center">
@@ -85,7 +85,7 @@ const displayNewsDetails = news => {
   modalPublishDate.textContent = `Published Date: ${news.author.published_date ? news.author.published_date : "No Author Found!"}`
   modalAuthor.textContent = `Author Name: ${news.author.name ? news.author.name : "No Author Found!"}`;
   modalImg.src = `${news.image_url ? news.image_url : "No image found!"}`;
-  modalDetails.textContent = news.details.slice(0,300);
+  modalDetails.textContent = news.details.slice(0,200);
   modalTitle.textContent = news.title;
 }
 
