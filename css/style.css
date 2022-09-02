@@ -8,8 +8,12 @@
   margin: 20px;
   padding: 20px;
 }
-.news-details{
+.author-img{
+  width: 60px;
+  border-radius: 50px;
+}
+/* .news-details{
   height: 92px;
   overflow: hidden;
   text-overflow: ellipsis;
-}
+} */
