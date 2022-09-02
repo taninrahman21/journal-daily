@@ -1,7 +1,3 @@
-const categoriesContainer = document.getElementById("categories-container");
-const listOfCategories = document.getElementById("list-of-categories");
-const newsNumberCounter = document.getElementById("news-number-counter");
-
 const loadCategories = () => {
   fetch("https://openapi.programming-hero.com/api/news/categories")
   .then(res => res.json())
@@ -9,14 +5,14 @@ const loadCategories = () => {
   .catch(error => console.log(error));
 }
 const displayCategories = (categories) => {
+  const newsNumberCounter = document.getElementById("news-number-counter");
+  const listOfCategories = document.getElementById("list-of-categories");
   categories.forEach(element => {
     const category = document.createElement("li");
-    category.style.color = "black";
     category.innerText = element.category_name;
     category.addEventListener("click", (e) => {
-      // console.log(element.category_id);
-      newsNumberCounter.classList.remove("d-none");
       loader(true);
+      newsNumberCounter.classList.remove("d-none");
       category.classList.add("text-danger");
       loadCategoriesNews(element.category_id);
       // e.target.style.color = "red";
@@ -33,11 +29,14 @@ const loadCategoriesNews = (id) => {
 const displayCategoriesNews = news => {
   news.sort((a,b )=> b.total_view - a.total_view);
   const showNewsNumber = document.getElementById("news-number");
-  showNewsNumber.textContent = `${news.length} items Found!`;
-  const displayNews = document.getElementById("display-categories-news");
+  if(news.length === 0){
+    showNewsNumber.textContent = `No items Found!`;
+  } else {
+    showNewsNumber.textContent = `${news.length} items Found!`;
+  }
+ const displayNews = document.getElementById("display-categories-news");
   displayNews.textContent = "";
   news.forEach(element => {
-    console.log(element);
     const newsDiv = document.createElement("div");
     newsDiv.classList.add("d-flex");
     newsDiv.classList.add("news");
@@ -77,7 +76,6 @@ const loadNewsDetails = news_id => {
   .catch(error => console.log(error));
 }
 const displayNewsDetails = news => {
-  console.log(news);
   const modalTitle = document.getElementById("newsDetailsModalLabel");
   const modalDetails = document.getElementById("modal-details");
   const modalAuthor = document.getElementById("author");
@@ -90,9 +88,8 @@ const displayNewsDetails = news => {
   modalTitle.textContent = news.title;
 }
 
-
 // Spinners Function
-const loader = isLoading => {
+const loader =( isLoading) => {
   const spinners = document.getElementById("loader");
   if(isLoading){
     spinners.classList.remove("d-none");
