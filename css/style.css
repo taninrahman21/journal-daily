@@ -12,8 +12,12 @@
   width: 60px;
   border-radius: 50px;
 }
-/* .news-details{
-  height: 92px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-} */
+@media screen and (max-width: 567px) {
+  .news{
+    flex-direction: column;
+  }
+  #list-of-categories{
+    
+  }
+  
+}
