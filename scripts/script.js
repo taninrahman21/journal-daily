@@ -54,35 +54,32 @@ const displayCategoriesNews = (news, targetCategory) => {
             <img src="${element.thumbnail_url}" alt="">
         </div>
         <div class="p-3 d-flex flex-column">
-       <div>
-          <h3>${element.title}</h3>
-          <p>${element.details.slice(0, 250).concat("...")}</p>
-       </div>
-        <div class="author-section d-flex justify-content-between align-items-center align-self-bottom">       
-              <div class="d-flex align-items-center">
+          <div>
+              <h3>${element.title}</h3>
+              <p>${element.details.slice(0, 300).concat("...")}</p>
+          </div>
+        <div class="author-section d-flex justify-content-between           align-items-center align-self-bottom">       
+          <div class="author d-flex align-items-center">
                    <img class="author-img me-2 img-fluid" src="${
                     element.author.img ? element.author.img : "No image Found"
                     }">
                   <div class="mt-2">
                       <h5 class="mb-0">${
-                        element.author.name
-                          ? element.author.name
-                          : "No Author Found"
-                      }</h5>
+                        element.author.name? element.author.name
+                        : "No Author Found"}
+                      </h5>
                       <p class="mt-0">${element.author.published_date}</p>
                   </div>
               </div>
-              <div class="d-flex align-items-center">
-                    <i class="fa fa-eye me-3"></i>
+              <div class="total-view d-flex align-items-center">
+                    <i class="fa fa-eye me-2 mt-1"></i>
                     <p class="m-0">${
                       element.total_view ? element.total_view : "No Views"
                     }</p>
               </div>
               <div>
-                    <button onclick="loadNewsDetails('${
-                      element._id
-                    }')" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#newsDetailsModal">Show Details</button>
-              </div>
+                    <button onclick="loadNewsDetails('${element._id}')" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#newsDetailsModal">Show Details</button>
+          </div>
        </div>
     </div>`;
       displayNews.appendChild(newsDiv);
@@ -101,7 +98,6 @@ const loadNewsDetails = (news_id) => {
 
 // Display News Details By Modal
 const displayNewsDetails = (news) => {
-  console.log(news);
   const modalTitle = document.getElementById("newsDetailsModalLabel");
   const modalDetails = document.getElementById("modal-details");
   const modalAuthor = document.getElementById("author");
@@ -134,4 +130,5 @@ const loader = (isLoading) => {
     spinners.classList.add("d-none");
   }
 };
+
 loadCategories();
