@@ -12,6 +12,9 @@
   width: 60px;
   border-radius: 50px;
 }
+.author-section{
+  margin-top: 60px;
+}
 @media screen and (max-width: 567px) {
   .news{
     flex-direction: column;
