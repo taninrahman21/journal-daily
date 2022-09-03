@@ -68,7 +68,7 @@ const displayCategoriesNews = (news, targetCategory) => {
                         element.author.name? element.author.name
                         : "No Author Found"}
                       </h5>
-                      <p class="mt-0">${element.author.published_date}</p>
+                      <p class="mt-0">${element.author.published_date ? element.author.published_date : "Not Found!"}</p>
                   </div>
               </div>
               <div class="total-view d-flex align-items-center">
@@ -116,7 +116,7 @@ const displayNewsDetails = (news) => {
     news.author.name ? news.author.name : "No Author Found!"
   }`;
   modalPublishDate.textContent = `Published Date: ${
-    news.author.published_date ? news.author.published_date : "No Author Found!"
+    news.author.published_date ? news.author.published_date : "Not Found!"
   }`;
  newsRatings.textContent =`Rating: ${news.rating ? news.rating.number : "No rating"}  Badge: ${news.rating ? news.rating.badge : "No badge"}`;
 };
