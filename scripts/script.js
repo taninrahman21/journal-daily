@@ -1,9 +1,11 @@
+// Load Categories
 const loadCategories = () => {
   fetch("https://openapi.programming-hero.com/api/news/categories")
   .then(res => res.json())
   .then(data => displayCategories(data.data.news_category))
   .catch(error => console.log(error));
 }
+// Display Categories
 const displayCategories = (categories) => {
   const newsNumberCounter = document.getElementById("news-number-counter");
   const listOfCategories = document.getElementById("list-of-categories");
@@ -13,26 +15,29 @@ const displayCategories = (categories) => {
     category.addEventListener("click", (e) => {
       loader(true);
       newsNumberCounter.classList.remove("d-none");
-      category.classList.add("text-danger");
-      loadCategoriesNews(element.category_id);
+      loadCategoriesNews(element.category_id,e.target);
       // e.target.style.color = "red";
     })
-    listOfCategories.appendChild(category)
+    listOfCategories.appendChild(category);   
   });
 }
-const loadCategoriesNews = (id) => {
+
+// Load Categories News
+const loadCategoriesNews = (id,targetCategory) => {
   fetch(`https://openapi.programming-hero.com/api/news/category/${id}`)
   .then(res => res.json())
-  .then(data => displayCategoriesNews(data.data))
+  .then(data => displayCategoriesNews(data.data,targetCategory))
   .catch(error => console.log(error));
 }
-const displayCategoriesNews = news => {
+
+// Display categories News
+const displayCategoriesNews = (news,targetCategory) => {
   news.sort((a,b )=> b.total_view - a.total_view);
   const showNewsNumber = document.getElementById("news-number");
   if(news.length === 0){
-    showNewsNumber.textContent = `No items Found!`;
+    showNewsNumber.textContent = `No items Found for category ${targetCategory.textContent}!`;
   } else {
-    showNewsNumber.textContent = `${news.length} items Found!`;
+    showNewsNumber.textContent = `${news.length} items Found for category ${targetCategory.textContent}!`;
   }
  const displayNews = document.getElementById("display-categories-news");
   displayNews.textContent = "";
@@ -47,12 +52,15 @@ const displayCategoriesNews = news => {
     <div class="p-3 d-flex flex-column">
        <div>
        <h3>${element.title}</h3>
-       <p>${element.details.slice(0,250)}</p>
+       <p>${element.details.slice(0,250).concat("...")}</p>
        </div>
         <div class="author-section d-flex justify-content-between align-items-center mt-5 align-self-bottom">       
               <div class="d-flex align-items-center">
                   <img class="author-img me-2 img-fluid" src="${element.author.img ? element.author.img : "No image Found"}">
-                  <p>${element.author.name ?  element.author.name : "No Author Found"}</p>
+                  <div class="mt-2">
+                  <h5 class="mb-0">${element.author.name ?  element.author.name : "No Author Found"}</h5>
+                  <p class="mt-0">${element.author.published_date}</p>
+                  </div>
               </div>
               <div class="total-view d-flex align-items-center">
                   <i class="fa fa-eye me-3"></i>
@@ -75,6 +83,7 @@ const loadNewsDetails = news_id => {
   .then(data => displayNewsDetails(data.data[0]))
   .catch(error => console.log(error));
 }
+// Display News Details By Modal
 const displayNewsDetails = news => {
   const modalTitle = document.getElementById("newsDetailsModalLabel");
   const modalDetails = document.getElementById("modal-details");
@@ -89,11 +98,11 @@ const displayNewsDetails = news => {
 }
 
 // Spinners Function
-const loader =( isLoading) => {
+const loader =(isLoading) => {
   const spinners = document.getElementById("loader");
   if(isLoading){
     spinners.classList.remove("d-none");
-  } else {
+  } else{
     spinners.classList.add("d-none");
   }
 }
