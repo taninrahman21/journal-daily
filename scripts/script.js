@@ -58,7 +58,7 @@ const displayCategoriesNews = (news, targetCategory) => {
               <h3>${element.title}</h3>
               <p>${element.details.slice(0, 300).concat("...")}</p>
           </div>
-        <div class="author-section d-flex justify-content-between           align-items-center align-self-bottom">       
+        <div class="author-section d-flex justify-content-between align-items-center align-self-bottom">       
           <div class="author d-flex align-items-center">
                    <img class="author-img me-2 img-fluid" src="${
                     element.author.img ? element.author.img : "No image Found"
@@ -79,7 +79,7 @@ const displayCategoriesNews = (news, targetCategory) => {
               </div>
               <div>
                     <button onclick="loadNewsDetails('${element._id}')" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#newsDetailsModal">Show Details</button>
-          </div>
+              </div>
        </div>
     </div>`;
       displayNews.appendChild(newsDiv);
