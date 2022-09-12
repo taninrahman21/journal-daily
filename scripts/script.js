@@ -11,12 +11,15 @@ const displayCategories = (categories) => {
   const listOfCategories = document.getElementById("list-of-categories");
   categories.forEach((element) => {
     const category = document.createElement("li");
+    category.classList.add("news-category-btn");
     category.innerText = element.category_name;
     category.addEventListener("click", (e) => {
       loader(true);
       newsNumberCounter.classList.remove("d-none");
       loadCategoriesNews(element.category_id, e.target);
-      // e.target.style.color = "red";
+      e.target.style.color = "red";
+      e.target.style.border = "1px solid red";
+      e.target.style.borderRadius = "5px";
     });
     listOfCategories.appendChild(category);
   });
@@ -24,6 +27,12 @@ const displayCategories = (categories) => {
 
 // Load Categories News
 const loadCategoriesNews = (id, targetCategory) => {
+  let allBtn = document.querySelectorAll(".news-category-btn");
+  allBtn.forEach(btn => {
+    btn.style.padding = "0 5px";
+    btn.style.color= "black";
+    btn.style.border = "1px solid transparent";
+  })
   fetch(`https://openapi.programming-hero.com/api/news/category/${id}`)
     .then((res) => res.json())
     .then((data) => displayCategoriesNews(data.data, targetCategory))
